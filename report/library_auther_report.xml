@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="author_print_badge" model="ir.actions.report">
+        <field name="name">Author Print Badge</field>
+        <field name="model">library.author</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">library_management.library_author_report</field>
+        <field name="report_file">library_management.library_author_report</field>
+        <field name="binding_model_id" ref="model_library_author" />
+        <field name="binding_type">report</field>
+    </record>
+    <template id="library_author_report">
+        <t t-foreach="docs" t-as="author">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 style="border-bottom: none;">
+                                    <span t-field="author.name" />
+                                </h2>
+                                <table class="table table-condensed">
+                                    <style>
+                                        <![CDATA[
+                                        .table th {
+                                            text-align: left;
+                                        }
+                                        ]]>
+                                    </style>
+                                    <tbody>
+                                        <tr>
+                                            <th>Date of Birth:</th>
+                                            <td>
+                                                <span t-field="author.birth_date" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total books:</th>
+                                            <td>
+                                                <span t-field="author.total_books" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 20px; border-bottom: 1px solid black;">
+                                    Books</h2>
+                                <t t-if="author.total_books &gt;= 1">
+                                    <t t-call="library_management.author_books_table" />
+                                </t>
+                                <t t-if="author.total_books == 0">
+                                    <p>They don't have any books.</p>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="author_books_table">
+        <table class="table table-condensed" id="author-book-table" style="line-height: 1.5;">
+            <style>
+                <![CDATA[#author-book-table, #author-book-table th, #author-book-table td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        width: 100%;
+                    }
+                    #author-book-table th:nth-child(1),
+                    #author-book-table td:nth-child(1) {
+                        width: 20%;
+                    }
+                    #author-book-table th:nth-child(2),
+                    #author-book-table td:nth-child(2) {
+                        width: 20%;
+                    }
+                    #author-book-table th:nth-child(3),
+                    #author-book-table td:nth-child(3) {
+                        width: 20%;
+                    }
+                    #author-book-table th:nth-child(4),
+                    #author-book-table td:nth-child(4) {
+                        width: 20%;
+                    }]]>
+            </style>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ISBN</th>
+                    <th>Publication Date</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="author.book_ids" t-as="book">
+                    <tr>
+                        <td>
+                            <span t-field="book.name" />
+                        </td>
+                        <td>
+                            <span t-field="book.isbn" />
+                        </td>
+                        <td>
+                            <span t-field="book.publication_date" />
+                        </td>
+                        <td>
+                            <span t-field="book.price" />
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</odoo>

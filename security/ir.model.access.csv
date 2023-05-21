@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+library_book,Access_base_group_user,model_library_book,library_management.overtime_user_access,1,1,1,1
+library_author,Access_base_group_user,model_library_author,library_management.overtime_user_access,1,1,1,1
+
+

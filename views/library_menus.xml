@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<menuitem id="library_menu_root" name="Library Management" sequence="1" web_icon="library_management,static/description/icon.png">
+    <menuitem id="library_first_level_menu" name="Library" sequence="1">
+        <menuitem id="library_model_menu_action" action="library_book_action" sequence="1"/>
+        <menuitem id="library_auther_model_menu_action" action="library_auther_action" sequence="2"/>
+    </menuitem>
+</menuitem>
+
+<!-- <menuitem name="" groups="overtime_manager_access"/> -->
+
+
+
+</odoo>
