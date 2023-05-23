@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="report_library_book">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <h2>Library Book Report</h2>
+
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>ISBN</th>
+                                            <th>Author</th>
+                                            <th>Publication Date</th>
+                                            <th>Price</th>
+                                            <th>Copies</th>
+                                            <th>Partner</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="docs" t-as="book">
+                                            <tr>
+                                                <td>
+                                                    <span t-field="book.name" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.isbn" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.author_ids.name" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.publication_date" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.price" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.copies" />
+                                                </td>
+                                                <td>
+                                                    <span t-field="book.partner_id.name" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-12">
+                            <br/>
+                            <br/>
+                                <h3>Total Price: <span
+                                        t-esc="sum(doc.price * doc.copies for doc in docs)" /></h3>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

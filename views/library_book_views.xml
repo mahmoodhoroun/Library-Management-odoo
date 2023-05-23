@@ -5,31 +5,7 @@
         <field name="res_model">library.book</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
-    <!-- <record id="library_book_view_kanban" model="ir.ui.view">
-        <field name="name">library.book.kanban</field>
-        <field name="model">library.book</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="oe_kanban_content">
-                                <t>Name:</t>
-                                <field name="name" />
-                                <br />
-                                <t>isbn:</t>
-                                <field name="isbn" />
-                                <br />
-                                <t>Author:</t>
-                                <field name="author_ids" />
 
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record> -->
     <record id="library_book_view_kanban" model="ir.ui.view">
         <field name="name">library.book.kanban</field>
         <field name="model">library.book</field>
@@ -52,11 +28,15 @@
                                         </div>
                                         <div>
                                             <span attrs="{'invisible': [('price', '=', 0)]}">Price: </span>
-                                            <field name="price"  attrs="{'invisible': [('price', '=', 0)]}"/>
+                                            <field name="price"
+                                                attrs="{'invisible': [('price', '=', 0)]}" />
                                         </div>
                                         <div>
-                                            <span attrs="{'invisible': [('publication_date', '=', False)]}">Publication Date: </span>
-                                            <field name="publication_date" attrs="{'invisible': [('publication_date', '=', False)]}"/>
+                                            <span
+                                                attrs="{'invisible': [('publication_date', '=', False)]}">Publication
+                                                Date: </span>
+                                            <field name="publication_date"
+                                                attrs="{'invisible': [('publication_date', '=', False)]}" />
                                         </div>
                                     </div>
                                 </div>
@@ -79,10 +59,20 @@
                 <field name="author_ids" />
                 <field name="publication_date" />
                 <field name="price" />
+                <field name="copies" />
 
             </tree>
         </field>
     </record>
 
+    <record id="action_report_library_book" model="ir.actions.report">
+        <field name="name">Library Book Report</field>
+        <field name="model">library.book</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">library_management.report_library_book</field>
+        <field name="report_file">library_management.report_library_book</field>
+        <field name="binding_model_id" ref="model_library_book" />
+        <!-- <field name="binding_type">report</field> -->
+    </record>
 
 </odoo>

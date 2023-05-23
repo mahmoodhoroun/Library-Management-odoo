@@ -17,4 +17,10 @@ class LibraryAuthor(models.Model):
         for record in self:
             record.total_books = len(record.book_ids)
 
+    def open_related_books(self):
+        action = self.env.ref('library_management.library_book_action').read()[0]
+        action['domain'] = [('author_ids', 'in', self.ids)]
+        return action
+
+
     

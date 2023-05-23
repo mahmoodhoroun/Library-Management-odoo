@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <!-- Action -->
+        <record id="action_invoice_book" model="ir.actions.act_window">
+            <field name="name">Invoice Book</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('book_id', '!=', False)]</field>
+        </record>
+        <menuitem id="menu_invoice_book" name="Invoice Book"
+            action="action_invoice_book" parent="account.menu_finance_receivables" sequence="10" />
+
+    </data>
+
+</odoo>

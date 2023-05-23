@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="update_book_price_wizard_form_view" model="ir.ui.view">
+            <field name="name">update.book.price.wizard.form</field>
+            <field name="model">update.book.price.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Update Book Price">
+                    <group>
+                        <field name="new_price" />
+                        <field name="book_ids" />
+                    </group>
+                    <footer>
+                        <button name="update_book_prices" string="Update" type="object"
+                            class="btn-primary" />
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- <record id="update_book_price_wizard_action" model="ir.actions.act_window">
+            <field name="name">Update Book Price</field>
+            <field name="res_model">update.book.price.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="update_book_price_wizard_form_view" />
+            <field name="target">new</field>
+        </record> -->
+        <record id="update_book_price_wizard_action" model="ir.actions.act_window">
+            <field name="name">Update Book Price</field>
+            <field name="res_model">update.book.price.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        <act_window id="launch_book_wizard"
+            name="Update Price"
+            binding_model="library.book"
+            res_model="update.book.price.wizard"
+            view_mode="form"
+            target="new" />
+    </data>
+</odoo>

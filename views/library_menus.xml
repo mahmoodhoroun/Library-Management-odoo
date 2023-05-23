@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<menuitem id="library_menu_root" name="Library Management" sequence="1" web_icon="library_management,static/description/icon.png">
-    <menuitem id="library_first_level_menu" name="Library" sequence="1">
-        <menuitem id="library_model_menu_action" action="library_book_action" sequence="1"/>
-        <menuitem id="library_auther_model_menu_action" action="library_auther_action" sequence="2"/>
+
+
+    <menuitem id="library_menu_root" name="Library Management" sequence="1"
+        web_icon="library_management,static/description/icon.png">
+        <menuitem id="library_first_level_menu" name="Library" sequence="1">
+            <menuitem id="library_model_menu_action" action="library_book_action" sequence="1" />
+            <menuitem id="library_auther_model_menu_action" action="library_auther_action"
+                sequence="2" />
+            <menuitem id="library_reservations_model_menu_action"
+                action="library_reservations_action" sequence="3" />
+            <menuitem id="update_book_price_wizard_model_menu_action" name="Update Book Price"
+                action="update_book_price_wizard_action" sequence="4" />
+
+        </menuitem>
+        <!-- <menuitem id="library_secand_level_menu" name="Report" sequence="2">
+            <menuitem id="print_library_book_report" name="Book Price"
+                action="action_report_library_book" sequence="1" />
+        </menuitem> -->
+
+        
+
+
     </menuitem>
-</menuitem>
-
-<!-- <menuitem name="" groups="overtime_manager_access"/> -->
-
 
 
 </odoo>

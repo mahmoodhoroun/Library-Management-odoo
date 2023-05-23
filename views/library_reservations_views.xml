@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="library_reservations_action" model="ir.actions.act_window">
+        <field name="name">Library Reservations</field>
+        <field name="res_model">library.reservations</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="library_reservations_view_tree" model="ir.ui.view">
+        <field name="name">library.reservations.tree</field>
+        <field name="model">library.reservations</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="book_id" />
+                <field name="date_from" />
+                <field name="borrowing_period" />
+                <field name="return_date" />
+                <field name="partner_id" />
+                <field name="price" />
+
+            </tree>
+        </field>
+    </record>
+    <record id="library_reservations_view_form" model="ir.ui.view">
+        <field name="name">library.reservations.form</field>
+        <field name="model">library.reservations</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="create_invoice" type="object" string="Create Invoice"
+                        attrs="{'invisible': [('state', '!=', 'posted')]}" />
+                    <button name="action_posted" type="object" string="POSTED" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,posted" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <!-- <field name="state" /> -->
+                            <field name="book_id" />
+                            <field name="date_from" />
+                            <field name="borrowing_period" />
+                        </group>
+                        <group>
+                            <field name="return_date" />
+                            <field name="partner_id" />
+                            <field name="price" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>
