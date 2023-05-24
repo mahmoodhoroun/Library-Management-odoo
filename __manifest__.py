@@ -16,6 +16,7 @@
         'views/res_partner_views.xml',
         'wizerd/update_book_price_wizard_views.xml',
         'views/views.xml',
+        'data/sequence.xml',
         'views/library_menus.xml',
         'report/library_auther_report.xml',
         'report/report_library_book.xml',

@@ -11,6 +11,7 @@
         <field name="model">library.reservations</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="sequence_number" />
                 <field name="book_id" />
                 <field name="date_from" />
                 <field name="borrowing_period" />
@@ -28,15 +29,24 @@
             <form>
                 <header>
                     <button name="create_invoice" type="object" string="Create Invoice"
-                        attrs="{'invisible': [('state', '!=', 'posted')]}" />
-                    <button name="action_posted" type="object" string="POSTED" />
+                        attrs="{'invisible': [('state', '!=', 'posted')]}"
+                        confirm="Are you sure you want to create an invoice?" />
+                    <button name="action_posted" type="object" string="POSTED"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        confirm="Are you sure you want to mark this reservation as posted?" />
                     <field name="state" widget="statusbar"
-                        statusbar_visible="draft,posted" />
+                        statusbar_visible="draft,posted,paid,canceled" />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="open_related_books"
+                            string="View Invoices" class="oe_stat_button" icon="fa-money">
+
+                        </button>
+                    </div>
                     <group>
                         <group>
-                            <!-- <field name="state" /> -->
+                            <field name="state" />
                             <field name="book_id" />
                             <field name="date_from" />
                             <field name="borrowing_period" />

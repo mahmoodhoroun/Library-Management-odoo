@@ -1,0 +1,9 @@
+<odoo>
+    <record id="seq_library_reservations" model="ir.sequence">
+        <field name="name">Library Reservation Sequence</field>
+        <field name="code">library.reservations</field>
+        <field name="prefix">AVE/book/</field>
+        <field name="padding">4</field>
+    </record>
+
+</odoo>
