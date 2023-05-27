@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <data noupdate="1">
         <!-- Define the scheduled action for returning reservations -->
         <record id="cron_return_reservations" model="ir.cron">
             <field name="name">Return Reservations Cron</field>

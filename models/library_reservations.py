@@ -9,9 +9,9 @@ _logger = logging.getLogger(__name__)
 
 class LibraryReservations(models.Model):
     _name = "library.reservations"
+    _rec_name = "sequence_number"
 
     book_id = fields.Many2one("library.book")
-    count_book = fields.Integer(compute="_compute_book")
     date_from = fields.Date(string="From Date")
     borrowing_period = fields.Integer(compute="_compute_borrowing_period", store=True)
     return_date = fields.Date(string="Return Date")
@@ -22,13 +22,6 @@ class LibraryReservations(models.Model):
          selection=[('draft', 'Draft'), ('posted', 'Posted'), ('paid', 'Paid'), ('canceled','Canceled')]
     )
     sequence_number = fields.Char(string="Sequence Number", readonly=True, copy=False)
-
-
-    @api.depends("book_id")
-    def _compute_book(self):
-        for record in self:
-            record.count_book = len(record.book_id)
-            _logger.info("*******************************************************")
 
 
     @api.depends('book_id')
@@ -73,14 +66,19 @@ class LibraryReservations(models.Model):
         
     
     def unlink(self):
-        # Get the book record
-        book = self.book_id
+        if self.state == 'paid':
+            invoices = self.env['account.move'].search([('book_id', 'in', self.book_id.ids)])
 
-        # Add one to the number of copies
-        book.copies += 1
+            # Delete the related invoices
+            invoices.unlink()
+            # Get the book record
+            book = self.book_id
 
-        # Delete the reservation record(s)
-        return super(LibraryReservations, self).unlink()
+            # Add one to the number of copies
+            book.copies += 1
+
+            # Delete the reservation record(s)
+            return super(LibraryReservations, self).unlink()
 
     def action_posted(self):
          for record in self:
@@ -120,7 +118,7 @@ class LibraryReservations(models.Model):
             reservation.book_id.copies += 1
 
             # Delete the reservation
-            reservation.unlink()
+            reservation.state = 'canceled'
             
     def open_related_books(self):
         invoices = self.env['account.move'].search([('book_id', 'in', self.book_id.ids)])
